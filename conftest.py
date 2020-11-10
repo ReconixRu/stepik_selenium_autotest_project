@@ -15,7 +15,9 @@ def browser(request):
     browser_name = request.config.getoption("browser_name")
     browser = None
     if browser_name == "chrome":
-        browser = webdriver.Chrome()
+        options = webdriver.ChromeOptions()
+        options.add_experimental_option('excludeSwitches', ['enable-logging'])
+        browser = webdriver.Chrome(options=options)
     elif browser_name == "firefox":
         browser = webdriver.Firefox()
     else:

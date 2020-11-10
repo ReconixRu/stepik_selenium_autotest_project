@@ -10,9 +10,19 @@ class ProductPage(BasePage):
     def should_be_correct_product_name(self):
         product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME)
         added_product_name = self.browser.find_element(*ProductPageLocators.ADDED_PRODUCT_NAME)
-        assert product_name.text == added_product_name.text, "Added product '{}' <> current product '{}'".format(added_product_name.text, product_name.text)
+        assert product_name.text == added_product_name.text, \
+            "Added product '{}' <> current product '{}'".format(added_product_name.text, product_name.text)
 
     def should_be_correct_basket_price(self):
         basket_price = self.browser.find_element(*ProductPageLocators.BASKET_PRICE)
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE)
-        assert product_price.text == basket_price.text, "Added product price '{}' <> current product price'{}'".format(basket_price.text, product_price.text)
+        assert product_price.text == basket_price.text, \
+            "Added product price '{}' <> current product price'{}'".format(basket_price.text, product_price.text)
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def should_be_disappear_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message isn't disappeared, but should be"
