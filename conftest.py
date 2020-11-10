@@ -11,6 +11,7 @@ def pytest_addoption(parser):
 
 @pytest.fixture(scope="function")
 def browser(request):
+    # https://stepik.org/lesson/213670/step/2?discussion=1319467&unit=186864 - тестирование в фоне
     browser_name = request.config.getoption("browser_name")
     browser = None
     if browser_name == "chrome":
